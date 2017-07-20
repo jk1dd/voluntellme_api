@@ -3,7 +3,7 @@ require 'CSV'
 namespace :import do
   desc "import all orgs"
   task import_orgs: :environment do
-    CSV.foreach('db/csv/CNCS', headers: true) do |row|
+    CSV.foreach('db/csv/CNCS.csv', headers: true) do |row|
       Organization.create!(
                           name: row['Grantee / Sponsor Organization'],
                           city: row['Service City'],
