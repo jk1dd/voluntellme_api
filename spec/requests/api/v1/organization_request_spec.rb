@@ -10,6 +10,6 @@ describe 'Organizations API' do
 
     organizations = JSON.parse(response.body)
 
-    expect(organizations.count).to eq(3)
+    expect(organizations.count).to eq(1)
   end
 end
