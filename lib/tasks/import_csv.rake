@@ -13,7 +13,7 @@ namespace :import do
                           zip: row['Service ZIP'],
                           loc: row['Location LAT/LONG']
       )
-      puts org.errors.full_messages if org.errors.any?
+      puts org.errors.full_messages.join(', ') if org.errors.any?
       counter += 1 if org.persisted?
     end
     puts "Imported #{counter} organizations."
