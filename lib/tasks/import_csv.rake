@@ -3,8 +3,9 @@ require 'CSV'
 namespace :import do
   desc "import all orgs"
   task import_orgs: :environment do
+    counter = 0
     CSV.foreach('db/csv/CNCS.csv', headers: true) do |row|
-      Organization.create!(
+      org = Organization.create(
                           name: row['Grantee / Sponsor Organization'],
                           city: row['Service City'],
                           county: row['Service County'],
@@ -12,6 +13,9 @@ namespace :import do
                           zip: row['Service ZIP'],
                           loc: row['Location LAT/LONG']
       )
+      puts org.errors.full_messages.join(', ') if org.errors.any?
+      counter += 1 if org.persisted?
     end
+    puts "Imported #{counter} organizations."
   end
 end
